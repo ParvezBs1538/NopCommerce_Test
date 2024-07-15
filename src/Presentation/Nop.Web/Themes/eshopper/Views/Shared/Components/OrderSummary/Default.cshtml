@@ -1,12 +1,13 @@
 @model ShoppingCartModel
 @using Nop.Core
+@using Nop.Core.Domain.Catalog
 @using Nop.Core.Domain.Tax
 @inject IWebHelper webHelper
 @inject IWorkContext workContext
     
 
 <div class="order-summary-content">
-@await Component.InvokeAsync("Widget", new { widgetZone = "order_summary_content_before" })
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "order_summary_content_before" })
 @await Html.PartialAsync("_OrderReviewData", Model.OrderReviewData)
 @if (Model.Items.Count > 0)
 {
@@ -117,7 +118,7 @@
                             }
                             @if (Model.IsEditable && item.AllowItemEditing)
                             {
-                                var editCartItemUrl = Url.RouteUrl("Product", new { SeName = item.ProductSeName }, webHelper.GetCurrentRequestProtocol());
+                                var editCartItemUrl = Url.RouteUrl<Product>(new { SeName = item.ProductSeName }, webHelper.GetCurrentRequestProtocol());
                                 editCartItemUrl = webHelper.ModifyQueryString(editCartItemUrl, "updatecartitemid", item.Id.ToString());
                                 <div class="edit-item">
                                     <a class="btn btn-default" href="@editCartItemUrl">@T("Common.Edit")</a>
@@ -143,7 +144,7 @@
                             {
                                 if (item.AllowedQuantities.Count > 0)
                                 {
-                                    <select name="itemquantity@(item.Id)" class="form-control square-box">
+                                    <select onchange="$('#updatecart').trigger('click');" name="itemquantity@(item.Id)" class="form-control square-box">
                                         @foreach (var qty in item.AllowedQuantities)
                                         {
                                             <option selected="@qty.Selected" value="@qty.Value">@qty.Value</option>
@@ -152,7 +153,7 @@
                                 }
                                 else
                                 {
-                                    <input name="itemquantity@(item.Id)" type="text" value="@(item.Quantity)" class="form-control square-box inheri-width"/>
+                                    <input onchange="$('#updatecart').trigger('click');" name="itemquantity@(item.Id)" type="text" value="@(item.Quantity)" class="form-control square-box inheri-width"/>
                                 }
 
                             }
@@ -177,7 +178,7 @@
         </div>
         
             <div class="selected-checkout-attributes">
-                @await Component.InvokeAsync("SelectedCheckoutAttributes")
+                @await Component.InvokeAsync(typeof(SelectedCheckoutAttributesViewComponent))
             </div>
         
             <div class="custom-cart-div">
@@ -185,7 +186,7 @@
                     @if (Model.IsEditable)
                     {
                         <div class="common-buttons clearfix">
-                            <input type="submit" name="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-primary get pull-left" />
+                            <input type="submit" name="updatecart" id="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-primary get pull-left" />
                             <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="btn btn-primary get pull-right" />
                         </div>
 
@@ -200,7 +201,7 @@
          }
         </div>
         <div class="cart-footer">
-            @await Component.InvokeAsync("Widget", new { widgetZone = "order_summary_cart_footer" })
+            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "order_summary_cart_footer" })
             
             @if (Model.IsEditable)
             {
@@ -224,13 +225,13 @@
                                     <div class="deals">
                                         @await Html.PartialAsync("_DiscountBox", Model.DiscountBox)
                                         @await Html.PartialAsync("_GiftCardBox", Model.GiftCardBox)
-                                        @await Component.InvokeAsync("Widget", new { widgetZone = "order_summary_content_deals" })
+                                        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "order_summary_content_deals" })
 
                                     </div>
                                 </div>
                             </div>
 
-                            @await Component.InvokeAsync("ShoppingCartEstimateShipping")
+                             @await Component.InvokeAsync(typeof(ShoppingCartEstimateShippingViewComponent))
 
                         </div>
                         }
@@ -239,7 +240,7 @@
                 <div class="col-md-4">
                     <div class="custom-footer-cart-div">
                         <div class="offer offer-default">
-                            @await Component.InvokeAsync("OrderTotals", new { isEditable = Model.IsEditable })
+                                @await Component.InvokeAsync(typeof(OrderTotalsViewComponent), new { isEditable = Model.IsEditable })
                             @if (Model.IsEditable)
                             {
                                 if (Model.TermsOfServiceOnShoppingCartPage)
@@ -294,7 +295,7 @@
         </div>
         if (Model.IsEditable)
         {
-            @await Component.InvokeAsync("CrossSellProducts")
+            @await Component.InvokeAsync(typeof(CrossSellProductsViewComponent))
         }
     }
 }
@@ -302,7 +303,7 @@ else
 {
     @T("ShoppingCart.CartIsEmpty")
 }
-@await Component.InvokeAsync("Widget", new { widgetZone = "order_summary_content_after" })
+    @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "order_summary_content_after" })
 
 </div>
 

@@ -9,7 +9,7 @@
 }
 @if (!Model.OnePageCheckoutEnabled)
 {
-    @await Component.InvokeAsync("CheckoutProgress", new { step = CheckoutProgressStep.Cart })
+    @await Component.InvokeAsync(typeof(CheckoutProgressViewComponent), new { step = CheckoutProgressStep.Cart })
 }
 else
 {
@@ -112,7 +112,7 @@ else
         <!--features_items-->
         <h2 class="title text-center">@T("ShoppingCart")</h2>
         @*@Html.Partial("OrderSummary", Model)*@
-        @await Component.InvokeAsync("OrderSummary", new { overriddenModel = Model })
+        @await Component.InvokeAsync(typeof(OrderSummaryViewComponent), new { overriddenModel = Model })
     </div>
 
 
