@@ -250,14 +250,22 @@
             </div>
 
         </form>
-
+        <!--product reviews-->
+        @if (Model.ProductReviewOverview.AllowCustomerReviews)
+        {
+            @await Html.PartialAsync("_ProductReviews", Model.ProductReviews)
+        }
     </div>
 </div>
 
 
 
-<div class="product-collateral">
+@* <div class="product-collateral">
     @await Component.InvokeAsync("ProductsAlsoPurchased", new { productId = Model.Id })
     @await Component.InvokeAsync("RelatedProducts", new { productId = Model.Id })
-</div>
+</div> *@
 
+<div class="product-collateral">
+    @await Component.InvokeAsync(typeof(ProductsAlsoPurchasedViewComponent), new { productId = Model.Id })
+    @await Component.InvokeAsync(typeof(RelatedProductsViewComponent), new { productId = Model.Id })
+</div>
