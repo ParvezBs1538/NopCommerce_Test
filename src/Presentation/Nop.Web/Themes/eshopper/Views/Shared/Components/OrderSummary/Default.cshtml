@@ -28,6 +28,7 @@
         @Html.AntiForgeryToken()
         <div class="table-responsive">
             <table class="cart table table-bordered">
+                <colgroup>
                     @if (Model.ShowSku)
                     {
                         <col width="1"/>
@@ -164,13 +165,13 @@
                                 </div>
                             }
                         </td>
-                                @if (Model.IsEditable)
-                                {
-                                    <td class="remove-from-cart text-center">
-                                        <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)" hidden />
-                                        <button type="button" name="updatecart" class="remove-btn" onclick="$('#removefromcart@(item.Id)').attr('checked', true); $('#updatecart').trigger('click');"></button>
-                                    </td>
-                                }
+                        @if (Model.IsEditable)
+                        {
+                            <td class="remove-from-cart text-center">
+                                <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)" hidden />
+                                <button type="button" name="updatecart" class="remove-btn" onclick="$('#removefromcart@(item.Id)').attr('checked', true); $('#updatecart').trigger('click');"></button>
+                            </td>
+                        }
                     </tr>
                 }
                 </tbody>

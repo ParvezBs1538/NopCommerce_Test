@@ -5253,3 +5253,18 @@ li.previous-page {
   border: 0;
   background: #ffffffab url(../images/remove.png) center no-repeat;
 }
+.news-date {
+  background: #eee;
+  padding: 0.4rem 1.2rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.news-comment-notifications ~ form .row {
+  display: flex;
+  align-items: center;
+}
+
+.news-comment-notifications ~ form .row input[type=text] {
+  width: 100%;
+}
