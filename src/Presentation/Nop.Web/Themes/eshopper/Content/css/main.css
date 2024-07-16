@@ -5246,3 +5246,10 @@ li.previous-page {
 .section.pickup-in-store{
     margin-bottom: 20px;
 }
+
+.cart .remove-from-cart .remove-btn {
+  width: 11px;
+  height: 11px;
+  border: 0;
+  background: #ffffffab url(../images/remove.png) center no-repeat;
+}
