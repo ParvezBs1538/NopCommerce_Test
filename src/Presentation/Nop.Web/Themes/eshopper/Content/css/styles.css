@@ -1929,3 +1929,10 @@ display: block;
 	color: #fff;
 }
 */
+button.button-2.continue-shopping-button {
+  padding: 5px;
+  color: red;
+  text-align: end;
+  background: black;
+  padding: 10px;
+}

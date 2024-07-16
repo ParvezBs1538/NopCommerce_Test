@@ -168,14 +168,22 @@
                         @if (Model.IsEditable)
                         {
                             <td class="remove-from-cart text-center">
+
                                 <input type="checkbox" name="removefromcart" id="removefromcart@(item.Id)" value="@(item.Id)" hidden />
                                 <button type="button" name="updatecart" class="remove-btn" onclick="$('#removefromcart@(item.Id)').attr('checked', true); $('#updatecart').trigger('click');"></button>
                             </td>
                         }
                     </tr>
                 }
+                
                 </tbody>
             </table>
+                <div class="common-buttons">
+                    <button type="submit" name="updatecart" id="updatecart" class="button-2 update-cart-button" style="display: none;">@T("ShoppingCart.UpdateCart")</button>
+
+                    <button type="submit" name="continueshopping" class="btn btn-primary button-2 continue-shopping-button">@T("ShoppingCart.ContinueShopping")</button>
+                    @* @await Component.InvokeAsync(typeof(ShoppingCartEstimateShippingViewComponent)) *@
+                </div>
         </div>
         
             <div class="selected-checkout-attributes">
