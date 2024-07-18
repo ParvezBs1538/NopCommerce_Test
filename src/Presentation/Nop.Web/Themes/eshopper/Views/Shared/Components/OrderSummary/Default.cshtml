@@ -93,7 +93,9 @@
                         @if (Model.ShowProductImages)
                         {
                             <td class="product-picture">
-                                <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title"/>
+                                <a href="@(Url.RouteUrl<Product>(new { SeName = item.ProductSeName }))">
+                                    <img alt="@item.Picture.AlternateText" src="@item.Picture.ImageUrl" title="@item.Picture.Title" />
+                                </a>
                             </td>
                         }
                         <td class="product">
@@ -179,29 +181,27 @@
                 
         </div>
         
-            <div class="selected-checkout-attributes">
-                @await Component.InvokeAsync(typeof(SelectedCheckoutAttributesViewComponent))
-            </div>
-        
-            <div class="custom-cart-div">
-                <div class="buttons">
-                    @if (Model.IsEditable)
-                    {
-                        <div class="common-buttons clearfix">
-                            <input type="submit" name="updatecart" id="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-primary get pull-left" />
-                            <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="btn btn-primary get pull-right" />
-                        </div>
-
-                    }
-
-
-                </div>
-           
-        @if (Model.IsEditable)
-         {
-             @await Html.PartialAsync("_CheckoutAttributes", Model)
-         }
+        <div class="selected-checkout-attributes">
+            @await Component.InvokeAsync(typeof(SelectedCheckoutAttributesViewComponent))
         </div>
+        
+        <div class="custom-cart-div">
+            <div class="buttons">
+                @if (Model.IsEditable)
+                {
+                    <div class="common-buttons clearfix">
+                        <input type="submit" name="updatecart" id="updatecart" value="@T("ShoppingCart.UpdateCart")" class="btn btn-primary get pull-left" />
+                        <input type="submit" name="continueshopping" value="@T("ShoppingCart.ContinueShopping")" class="btn btn-primary get pull-right" />
+                    </div>
+
+                }
+            </div>
+            @if (Model.IsEditable)
+            {
+                @await Html.PartialAsync("_CheckoutAttributes", Model)
+            }
+        </div>
+
         <div class="cart-footer">
             @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "order_summary_cart_footer" })
             
