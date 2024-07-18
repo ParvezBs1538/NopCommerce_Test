@@ -1,6 +1,7 @@
 ﻿@model FooterModel
 @using Nop.Core
 @using Nop.Core.Domain.Tax
+@using Nop.Core.Domain.Topics
 @inject IWorkContext workContext;
 
 <footer id="footer" class="footer">
@@ -92,15 +93,18 @@
                 <div class="single-widget footer-block">
                     <h2 class="header-title">@T("Footer.Information")</h2>
                     <ul class="nav nav-pills nav-stacked">
-                        @if (Model.SitemapEnabled)
+                        @if (Model.SitemapEnabled && Model.DisplaySitemapFooterItem)
                         {
                             <li><a href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
                         }
                         @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
                         {
-                            <li><a href="@Url.RouteUrl("Topic", new { SeName = topic.SeName })">@topic.Name</a></li>
+                            <li><a href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
                         }
-                        <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                        @if (Model.DisplayContactUsFooterItem)
+                        {
+                            <li><a href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -167,10 +171,7 @@
                     @await Component.InvokeAsync("NewsletterBox")
 
                     <div class="social-icons">
-                        @*<div class="title">
-                                <strong>@T("Footer.FollowUs")</strong>
-                            </div>*@
-                        @await Component.InvokeAsync("SocialButtons")
+                        @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
                     </div>
 
                 </div>
@@ -204,13 +205,13 @@
                         </div>
                     }
                     <div class="text-center">
-                        @await Component.InvokeAsync("StoreThemeSelector")
+                        @await Component.InvokeAsync(typeof(StoreThemeSelectorViewComponent))
                     </div>
                 </div>
             </div>
         </div>
 
-        @await Component.InvokeAsync("Widget", new { widgetZone = "footer" })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = "footer" })
     </div>
 </footer>
 
