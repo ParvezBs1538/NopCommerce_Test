@@ -54,12 +54,6 @@
                             <table class="table table-condensed custom-shopping-cart-page table-bordered cart">
                                 <thead>
                                     <tr class="cart_menu cart-header-row">
-                                        @if (Model.IsEditable)
-                                        {
-                                            <td>
-                                                @T("ShoppingCart.Remove")
-                                            </td>
-                                        }
                                         @if (Model.DisplayAddToCart)
                                         {
                                             <td class="cart">
@@ -90,7 +84,12 @@
                                         <td class="end">
                                             @T("ShoppingCart.ItemTotal")
                                         </td>
-
+                                        @if (Model.IsEditable)
+                                        {
+                                            <td>
+                                                @T("ShoppingCart.Remove")
+                                            </td>
+                                        }
                                     </tr>
 
                                 </thead>
@@ -98,12 +97,6 @@
                                     @foreach (var item in Model.Items)
                                     {
                                         <tr class="cart-item-row">
-                                            @if (Model.IsEditable)
-                                            {
-                                                <td class="remove-from-cart">
-                                                    <input type="checkbox" name="removefromcart" value="@(item.Id)" />
-                                                </td>
-                                            }
                                             @if (Model.DisplayAddToCart)
                                             {
                                                 <td class="remove-from-cart">
@@ -184,6 +177,12 @@
                                                     </div>
                                                 }
                                             </td>
+                                            @if (Model.IsEditable)
+                                            {
+                                                <td class="remove-from-cart">
+                                                    <input type="checkbox" name="removefromcart" value="@(item.Id)" />
+                                                </td>
+                                            }
                                         </tr>
                                     }
                                 </tbody>
