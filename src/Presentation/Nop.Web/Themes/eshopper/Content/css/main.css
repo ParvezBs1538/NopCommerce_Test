@@ -2496,6 +2496,7 @@ select {
 .btn.btn-primary {
     border-radius: 0;
     margin-top: 16px;
+    margin-right: 10px;
 }
 
 .blank-arrow {
@@ -3588,7 +3589,7 @@ ul.minicart-dropdown-menu {
     color: #696763; 
     padding: 30px 15px;
     margin-bottom: 15px;
-    display: none;
+    /*display: none;*/
 }
 
 .custom-footer-cart-div {
@@ -5282,4 +5283,8 @@ li.previous-page {
   background: #eee;
   padding: 0 1rem 1.2rem 0;
   margin-top: -2rem;
+  margin-bottom: 2rem;
+}
+.selected-checkout-attributes {
+    margin-bottom: 1rem;
 }
