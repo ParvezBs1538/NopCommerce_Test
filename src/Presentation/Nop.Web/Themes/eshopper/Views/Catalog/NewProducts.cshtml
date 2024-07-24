@@ -12,30 +12,25 @@
     <div class="custom-page-box-border-less-div">    
         @if (Model.CatalogProductsModel.Products.Count > 0)
         {
-        
             <div class="product-grid home-page-product-grid">
                 <div class="row ">
 
                     @foreach (var product in Model.CatalogProductsModel.Products)
                     {
-
                         <div class="col-md-4">
                             <div class="offer offer-default silde-show-offer pull-text-center">
                                 @await Html.PartialAsync("_ProductBox", product)
                             </div>
                         </div>
-
                     }
                 </div>
             </div>
-        
-
-        }else
+        }
+        else
         {
             <div class="alert alert-info square-box">
                 No New Products are Available
             </div>
         }
-
     </div>
 </div>

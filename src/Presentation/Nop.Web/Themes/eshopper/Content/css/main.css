@@ -5294,3 +5294,27 @@ li.previous-page {
 .d-flex {
     display: flex;
 }
+.product-list .item-box {
+  width: 100%;
+  margin-bottom: 0;
+  padding: 1rem 0;
+}
+.product-list .productinfo.text-center {
+  align-items: flex-start;
+  flex-direction: row;
+}
+.product-list .product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 3rem;
+}
+.product-list .product-info h2 {
+  order: 2;
+}
+  .product-list .product-info > * {
+      order: 1;
+  }
+  .product-list .product-info > .add-to-cart-wrapper {
+    order: 3;
+  }
